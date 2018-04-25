@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   <ui:composition template="/user_template.xhtml">
+      <ui:define name="title">
+         <h3><b>#{bundle.Accounts}</b></h3>
+      </ui:define>
+      <ui:define name="body">
+         <h:form id="master">
+            <h:outputText escape="false" value="#{bundle.ListUserEmpty}" rendered="#{userController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{accountController.findByUserId().size() > 0}">
+               <table class="w3-table-all w3-hoverable">
+                  <thead>
+                     <tr class="w3-red">
+                        <!--<th>{bundle.ListAccountTitle_id}</th>-->
+                        <th>#{bundle.ListAccountTitle_accountNumber}</th>
+                        <th>#{bundle.ListAccountTitle_accountTypeId}</th>
+                        <th>#{bundle.ListAccountTitle_balance}</th>
+                        <th>#{bundle.Rate}</th>
+                        <th>#{bundle.CreateAccountTypeLabel_withdrawalLimit}</th>
+                        <th>#{bundle.Description}</th>
+                        <th>#{bundle.Actions}</th>
+                     </tr>
+                  </thead>
+                  <ui:repeat value="#{accountController.items}" var="item">
+                     <!-- userController.loggedUserId() session user id-->
+                     <ui:fragment rendered="#{item.userId.id eq userController.loggedUserId()}">
+                        <br/>
+                        <tr>
+                           <!--<td>{item.id}</td>-->
+                           <td>#{item.accountNumber}</td>
+                           <td>#{item.accountTypeId.name}</td>
+                           <td><b>CHF #{item.balance}.-</b></td>
+                           <td>#{item.accountTypeId.interestRate}%</td>
+                           <td>#{item.accountTypeId.withdrawalLimit}</td>
+                           <td>#{item.accountTypeId.description}</td>
+                           <td>
+                              <p:commandButton action="#{accountController.prepareView}" class="w3-button w3-teal w3-round" value="#{bundle.ListUserViewLink}"/>
+                              <h:outputText value=" "/>
+                              <p:commandButton class="w3-button w3-green w3-round" value="#{bundle.Deposit}"
+                                 update=":deposit" oncomplete="PF('deposit').show()"/>
+                              <h:outputText value=" "/>
+                              <p:commandButton class="w3-button w3-red w3-round" value="#{bundle.Withdrawal}" 
+                                 update=":withdrawal" oncomplete="PF('withdrawal').show()" />
+                              <h:outputText value=" "/>
+                              <p:commandButton class="w3-button w3-yellow w3-round" value="#{bundle.Transaction}" 
+                                 update=":sendAmount" oncomplete="PF('sendAmount').show()" />
+                           </td>
+                        </tr>
+                     </ui:fragment>
+                  </ui:repeat>
+               </table>
+            </h:panelGroup>
+         </h:form>
+         <br/><br/>
+         <button class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick="document.getElementById('demand').style.display = 'block'"><b>Ouvrir un nouveau compte</b></button>
+         <p:dialog id="deposit" widgetVar="deposit">
+            <h:form class="w3-center">
+               <h:graphicImage value="../resources/images/deposit.png" alt="Deposit" style="width: 200px" class="w3-circle w3-margin-top"/>
+               <label>
+                  <strong>
+                     <h4>Entrez le montant à déposer</h4>
+                  </strong>
+               </label>
+               <p:inputText class="w3-input w3-border w3-round-large" value="#{accountController.amount}"/>
+               <br/>
+               <input type="hidden" name="accountNum" value="#{item.accountNumber}" />
+               <p:button value="Annuler" onclick="PF('deposit').hide(); return false" />
+               <p:commandButton value="#{bundle.Deposit}" action="#{accountController.deposit}" 
+                  update=":master" oncomplete="PF('deposit').hide()" />
+            </h:form>
+         </p:dialog>
+         <p:dialog id="withdrawal" widgetVar="withdrawal">
+            <h:form class="w3-center">
+               <h:graphicImage value="../resources/images/dr.png" alt="Deposit" style="width: 200px" class="w3-circle w3-margin-top"/>
+               <label>
+                  <strong>
+                     <h4>Entrez le montant désiré</h4>
+                  </strong>
+               </label>
+               <p:inputText class="w3-input w3-border w3-round-large" value="#{accountController.amount}"/>
+               <br/>
+               <input type="hidden" name="accountNum" value="#{item.accountNumber}" />
+               <p:button value="Annuler" onclick="PF('withdrawal').hide(); return false" />
+               <p:commandButton value="#{bundle.Withdrawal}" action="#{accountController.withdrawal}" 
+                  update=":master" oncomplete="PF('withdrawal').hide()" />
+            </h:form>
+         </p:dialog>
+         <p:dialog id="sendAmount" widgetVar="sendAmount">
+            <h:form class="w3-center">
+               <h:graphicImage value="../resources/images/trans.png" alt="Deposit" style="width: 200px" class="w3-circle w3-margin-top"/>
+               <label>
+                  <strong>
+                     <h4>Entrez le numéro de compte de destination</h4>
+                  </strong>
+               </label>
+               <p:inputText class="w3-input w3-border w3-round-large" value="#{accountController.accountReceiver}"/>
+               <br/>
+               <label>
+                  <strong>
+                     <h4>Entrez le montant désiré</h4>
+                  </strong>
+               </label>
+               <p:inputText class="w3-input w3-border w3-round-large" value="#{accountController.amount}"/>
+               <br/>
+               <label>
+                  <strong>
+                     <h4>Description</h4>
+                  </strong>
+               </label>
+               <p:inputTextarea  class="w3-input w3-border w3-round-large" value="#{accountController.description}"/>
+               <br/>
+               <input type="hidden" name="accountNum" value="#{item.accountNumber}" />
+               <p:button value="Annuler" onclick="PF('sendAmount').hide(); return false" />
+               <p:commandButton value="#{bundle.Transaction_}" action="#{accountController.sendAmount}" 
+                  update=":master" oncomplete="PF('sendAmount').hide()" />
+            </h:form>
+         </p:dialog>
+         <!--Demand modal-->
+         <div id="demand" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+               <!--Modal header-->
+               <div class="w3-center">
+                  <br/>
+                  <span onclick="document.getElementById('demand').style.display = 'none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                  <h:graphicImage value="../resources/images/bank.png" alt="Avatar" style="width:30%" />
+               </div>
+               <!--Demand form-->
+               <h:form class="w3-container">
+                  <div class="w3-section">
+                     <label>
+                        <strong>
+                           <h4>Quel type de compte souhaitez-vous ouvrir</h4>
+                        </strong>
+                     </label>
+                     <h:selectOneMenu class="w3-select" id="accountTypeId" value="#{demandController.selected.accountTypeId}" title="#{bundle.CreateDemandTitle_accountTypeId}" required="true" requiredMessage="#{bundle.CreateDemandRequiredMessage_accountTypeId}">
+                        <f:selectItems value="#{accountTypeController.itemsAvailableSelectOne}"/>
+                     </h:selectOneMenu>
+                     <h:commandButton class="w3-btn w3-round-xxlarge btn w3-block w3-green w3-section" value="Soumettre la demande" action="#{demandController.create()}"></h:commandButton>
+                  </div>
+               </h:form>
+            </div>
+         </div>
+      </ui:define>
+   </ui:composition>
+</html>

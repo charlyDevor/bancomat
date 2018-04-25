@@ -1,0 +1,282 @@
+root { 
+    display: block;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3a4f54;
+    background-color: #dfecf1;
+    font-size: small;
+}
+
+a {
+    color: #e33b06;
+}
+
+table {
+    empty-cells: show;
+}
+
+form.jsfcrud_list_form th, td th {
+    font-size: x-small;
+    color: #4e6a71;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: #b2d5d6;
+    border-bottom-color: #b2d5d6;
+    border-left-color: #90b4bd;
+    border-right-color: #90b4bd;
+    letter-spacing: 3px;
+    text-align: left;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: #b2d5d6;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 8px;
+    font-size: small;
+}
+
+form.jsfcrud_list_form td, td td {
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: #b2d5d6;
+    border-bottom-color: #b2d5d6;
+    border-left-color: #b2d5d6;
+    border-right-color: #b2d5d6;
+    vertical-align: baseline;
+    padding-bottom: 0px;
+}
+
+tr.jsfcrud_odd_row {
+    background-color: #fefeff;
+    color: #4e6a71;
+}
+
+
+tr.jsfcrud_even_row {
+    background-color: #eff5fa;
+    color: #4e6a71;
+}
+
+#busyImage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.auth-div {
+    margin-top: 50px;
+    text-align: center;
+}
+.btn{
+    height: 50px;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+} 
+
+.pdf {
+    border: 2px solid red;
+    background-color: white;
+    border-radius: 12px;
+}
+
+label{
+    color: purple; 
+    font-weight: bold;
+}
+
+input {
+    color: blue;
+}
+
+
+.ui-datatable table{
+    border-collapse:collapse;
+    width:100%;
+}
+.ui-datatable .ui-datatable-header,.ui-datatable .ui-datatable-footer{
+    text-align:center;
+    padding:4px 10px;
+}
+.ui-datatable .ui-datatable-header{
+    border-bottom:0px none;
+}
+.ui-datatable .ui-datatable-footer{
+    border-top:0px none;
+}
+.ui-datatable thead th, .ui-datatable tfoot td{
+    text-align:center;
+}
+.ui-datatable thead th,.ui-datatable tbody td,.ui-datatable tfoot td{
+    padding:4px 10px;
+    overflow:hidden;
+    white-space:nowrap;
+    border-width:1px;
+    border-style:solid;
+}
+.ui-datatable tbody td{
+    border-color:inherit;
+}
+.ui-datatable .ui-sortable-column{
+    cursor:pointer;
+}
+.ui-datatable div.ui-dt-c{
+    position:relative;
+}
+.ui-datatable .ui-sortable-column-icon{
+    display:inline-block;
+    margin:-3px 0px -3px 2px;
+}
+.ui-datatable .ui-column-filter{
+    display:block;
+    width:100px;
+    margin:auto;
+}
+.ui-datatable .ui-expanded-row{
+    border-bottom:0px none;
+}
+.ui-datatable .ui-expanded-row-content{
+    border-top:0px none;
+}
+.ui-datatable .ui-row-toggler{
+    cursor:pointer;
+}
+.ui-datatable tr.ui-state-highlight{
+    cursor:pointer;
+}
+.ui-datatable .ui-selection-column .ui-chkbox-all{
+    display:block;
+    margin:0px auto;
+    width:16px;
+    height:16px;
+}
+.ui-datatable-scrollable table{
+    table-layout:fixed;
+}
+.ui-datatable-scrollable-body{
+    overflow:auto;
+}
+.ui-datatable-scrollable-header,.ui-datatable-scrollable-footer{
+    overflow:hidden;
+    border:0px none;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header,.ui-datatable-scrollable .ui-datatable-scrollable-footer{
+    position:relative;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header td{
+    font-weight:normal;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar{
+    -webkit-appearance:none;
+    width:15px;
+    background-color:transparent;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb{
+    border-radius:8px;
+    border:1px solid white;
+    background-color:rgba(194,194,194,.5);
+}
+.ui-datatable .ui-datatable-data tr.ui-state-hover{
+    border-color:inherit;
+    font-weight:inherit;
+    cursor:pointer;
+}
+.ui-paginator {
+    padding:100px;
+}
+
+.ui-widget-header {
+    visibility: none;
+}
+
+.ui-datatable .ui-paginator,.ui-datatable .ui-paginator{
+    padding:100px;
+}
+.ui-column-dnd-top, ui-column-dnd-bottom{
+    display:none;
+    position:absolute;
+}
+.ui-column-dnd-top .ui-icon, ui-column-dnd-bottom .ui-icon{
+    position:absolute;
+    top:-4px;
+}
+/* InCell Editing */.ui-datatable .ui-cell-editor-input{
+    display:none;
+}
+.ui-datatable .ui-row-editing .ui-cell-editor .ui-cell-editor-output{
+    display:none;
+}
+.ui-datatable .ui-row-editing .ui-cell-editor .ui-cell-editor-input{
+    display:block;
+}
+.ui-datatable .ui-row-editor span{
+    cursor:pointer;
+    display:inline-block;
+}
+.ui-datatable .ui-row-editor .ui-icon-pencil{
+    display:inline-block;
+}
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-pencil{
+    display:none;
+}
+.ui-datatable .ui-row-editor .ui-icon-check,.ui-datatable .ui-row-editor .ui-icon-close{
+    display:none;
+}
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-check,.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-close{
+    display:inline-block;
+}
+.ui-datatable .ui-datatable-data tr.ui-row-editing td.ui-editable-column,.ui-datatable .ui-datatable-data td.ui-cell-editing{
+    padding:0;margin:0;
+}
+/*resizer */.ui-datatable .ui-column-resizer{
+    width:8px;height:20px;
+    padding:0px;cursor:col-resize;
+    background-image:url("/ScraperOnWeb/javax.faces.resource/spacer/dot_clear.gif.jsf?ln=primefaces");
+    margin:-4px -10px -4px 0px;
+    float:right;
+}
+.ui-datatable .ui-filter-column .ui-column-resizer{
+    height:45px;
+}
+.ui-datatable .ui-column-resizer-helper{
+    width:1px;
+    position:absolute;
+    z-index:10;
+    display:none;
+}
+.ui-datatable-resizable{
+    padding-bottom:1px;/*fix for webkit overlow*/overflow:auto;
+}
+.ui-datatable-resizable table{
+    table-layout:fixed;
+}
+.ui-datatable-rtl{
+    direction:rtl;
+}
+.ui-datatable-rtl.ui-datatable thead th, .ui-datatable-rtl.ui-datatable tfoot td{
+    text-align:right;
+}
+
+
+.ui-datatable{
+    border: none;
+    width: 80%;
+}

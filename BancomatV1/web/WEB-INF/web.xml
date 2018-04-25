@@ -15,10 +15,58 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/Opening.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>Administrateur de l'application</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin</web-resource-name>
+            <description/>
+            <url-pattern>/faces/secureAdmin/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Utilisateur de l'application </display-name>
+        <web-resource-collection>
+            <web-resource-name>User</web-resource-name>
+            <description/>
+            <url-pattern>/faces/secureUser/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>User</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>bancomatRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/Opening.xhtml</form-login-page>
+            <form-error-page>/faces/Opening.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Role des clients de la banque</description>
+        <role-name>User</role-name>
+    </security-role>
+    <security-role>
+        <description>Rôle des admins de la banque</description>
+        <role-name>Admin</role-name>
+    </security-role>
+    <!--<context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>-->
 </web-app>

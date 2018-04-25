@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/admin_template.xhtml">
+        <ui:define name="title">
+            <h5>#{bundle.Newuser}</h5>
+        </ui:define>
+        <ui:define name="body">
+            <!--<h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:growl id="growl" showDetail="true" sticky="true" />  
+            </h:panelGroup>-->
+            
+            <h:form>
+                <h:outputLabel value="#{bundle.CreateUserLabel_id}" for="id" />
+                <h:inputText id="id" value="#{userController.selected.id}" title="#{bundle.CreateUserTitle_id}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_id}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_firstName}" for="firstName" />
+                <h:inputText id="firstName" value="#{userController.selected.firstName}" title="#{bundle.CreateUserTitle_firstName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_firstName}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_lastName}" for="lastName" />
+                <h:inputText id="lastName" value="#{userController.selected.lastName}" title="#{bundle.CreateUserTitle_lastName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_lastName}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_username}" for="username" />
+                <h:inputText id="username" value="#{userController.selected.username}" title="#{bundle.CreateUserTitle_username}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_username}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
+                <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_password}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_email}" for="email" />
+                <h:inputText id="email" value="#{userController.selected.email}" title="#{bundle.CreateUserTitle_email}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_email}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_streetNumber}" for="streetNumber" />
+                <h:inputText id="streetNumber" value="#{userController.selected.streetNumber}" title="#{bundle.CreateUserTitle_streetNumber}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_streetNumber}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_address}" for="address" />
+                <h:inputText id="address" value="#{userController.selected.address}" title="#{bundle.CreateUserTitle_address}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_address}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_npa}" for="npa" />
+                <h:inputText id="npa" value="#{userController.selected.npa}" title="#{bundle.CreateUserTitle_npa}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_npa}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_city}" for="city" />
+                <h:inputText id="city" value="#{userController.selected.city}" title="#{bundle.CreateUserTitle_city}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_city}" class="w3-input w3-animate-input" style="width:50%"/>
+                <h:outputLabel value="#{bundle.CreateUserLabel_created}" for="created" />
+                <h:inputText id="created" value="#{userController.selected.created}" title="#{bundle.CreateUserTitle_created}" class="w3-input w3-animate-input" style="width:50%">
+                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                </h:inputText>
+                <br />
+                <div class="w3-container">
+                    <a href="User_list.xhtml" class="w3-button w3-white w3-border w3-border-red w3-round-large">Revenir</a>
+                    <!--<h:link outcome="/index" value="#{bundle.CreateUserIndexLink}"/>-->
+                    <h:commandLink class="w3-button w3-white w3-border w3-border-red w3-round-large" action="#{userController.create}" value="#{bundle.CreateUserSaveLink}" />                 
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

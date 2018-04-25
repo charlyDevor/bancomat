@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/admin_template.xhtml">
+        <ui:define name="title">
+            <h3><b>#{bundle.ViewUserTitle}</b></h3>
+        </ui:define>
+        <ui:define name="body">
+            <div class="w3-row">
+                <div class="w3-col s6 w3-center">
+                    <h:form>
+                        <div class="w3-dark-grey">
+
+                            <div class="w3-container w3-center">
+                                <h:graphicImage value="../resources/images/avatar.png" alt="Avatar" class="w3-circle w3-margin-right" style="width:30%"/>
+                            </div>
+                            <table class="w3-table-all" style="color: black">
+                                <tr>
+                                    <!--<td style="width: 40%"><b>#'{bundle.ListUserTitle_id}</b></td>-->
+                                    <!--<td>#'{userController.selected.id}</td>-->
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_firstName}</b></td>
+                                    <td>#{userController.selected.firstName}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_lastName}</b></td>
+                                    <td>#{userController.selected.lastName}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_username}</b></td>
+                                    <td>#{userController.selected.username}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_email}</b></td>
+                                    <td>#{userController.selected.email}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_password}</b></td>
+                                    <td>#{userController.selected.password}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_address}</b></td>
+                                    <td>#{userController.selected.address}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_streetNumber}</b></td>
+                                    <td>#{userController.selected.streetNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_npa}</b></td>
+                                    <td>#{userController.selected.npa}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_city}</b></td>
+                                    <td>#{userController.selected.city}</td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 40%"><b>#{bundle.ListUserTitle_created}</b></td>
+                                    <td>#{userController.selected.created}</td>
+                                </tr>
+                            </table>
+                    </div>
+                    <br />
+                    <div class="w3-container">
+                        <a href="User_list.xhtml" class="w3-button w3-white w3-border w3-border-red w3-round-large" >Revenir</a>
+                        <h:commandLink class="w3-button w3-white w3-border w3-border-red w3-round-large" action="#{userController.prepareCreate}" value="#{bundle.Newuser}" />
+                        <h:commandLink class="w3-button w3-white w3-border w3-border-red w3-round-large" action="#{userController.prepareEdit()}" value="#{bundle.ViewUserEditLink}"/>
+                        <h:commandLink class="w3-button w3-white w3-border w3-border-red w3-round-large" action="#{userController.destroyAndView}" value="#{bundle.ViewUserDestroyLink}"/>
+                    </div>
+                </h:form>
+                </div>
+                <div class="w3-col s6 w3-center">
+                    <h:form>
+                        <div class="w3-blue">
+
+                            <div class="w3-container w3-center">                                
+                                <h5><b>Comptes</b></h5>
+                            </div>
+                            <table class="w3-table-all" style="color: black">
+                                <thead>
+                                    <tr class="w3-green">
+                                        <th>#{bundle.CreateAccountLabel_id}</th>
+                                        <th>#{bundle.CreateAccountTitle_accountNumber}</th>
+                                        <th>#{bundle.CreateAccountLabel_accountTypeId}</th>
+                                        <th>#{bundle.CreateAccountTitle_balance}</th>
+                                        <th>#{bundle.ViewAccountTypeTitle_interestRate}</th>
+                                        <th>#{bundle.CreateAccountTypeTitle_withdrawalLimit}</th>
+                                    </tr>
+                                </thead>
+                                <ui:repeat value="#{accountController.items}" var="item">
+                                    <ui:fragment rendered="#{item.userId.id eq userController.selected.id}">
+                                        <tr>
+                                            <td>#{item.id}</td>
+                                            <td>#{item.accountNumber}</td>
+                                            <td>#{item.accountTypeId.name}</td>
+                                            <td>#{item.balance}</td>
+                                            <td>#{item.accountTypeId.interestRate}</td>
+                                            <td>#{item.accountTypeId.withdrawalLimit}</td>
+                                        </tr>
+                                    </ui:fragment>
+                                </ui:repeat>
+                            </table>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

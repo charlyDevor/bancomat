@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/admin_template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDemandTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDemandLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{demandController.selected.id}" title="#{bundle.EditDemandTitle_id}" required="true" requiredMessage="#{bundle.EditDemandRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditDemandLabel_userId}" for="userId" />
+                    <h:inputText id="userId" value="#{demandController.selected.userId}" title="#{bundle.EditDemandTitle_userId}" required="true" requiredMessage="#{bundle.EditDemandRequiredMessage_userId}"/>
+                    <h:outputLabel value="#{bundle.EditDemandLabel_accepter}" for="accepter" />
+                    <h:inputText id="accepter" value="#{demandController.selected.accepter}" title="#{bundle.EditDemandTitle_accepter}" required="true" requiredMessage="#{bundle.EditDemandRequiredMessage_accepter}"/>
+                    <h:outputLabel value="#{bundle.EditDemandLabel_accountTypeId}" for="accountTypeId" />
+                    <h:selectOneMenu id="accountTypeId" value="#{demandController.selected.accountTypeId}" title="#{bundle.EditDemandTitle_accountTypeId}" required="true" requiredMessage="#{bundle.EditDemandRequiredMessage_accountTypeId}">
+                        <f:selectItems value="#{accountTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{demandController.update}" value="#{bundle.EditDemandSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDemandViewLink}"/>
+                <br />
+                <h:commandLink action="#{demandController.prepareList}" value="#{bundle.EditDemandShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDemandIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

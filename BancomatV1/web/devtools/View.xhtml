@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewDevtoolsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_id}"/>
+                    <h:outputText value="#{devtoolsController.selected.id}" title="#{bundle.ViewDevtoolsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_type}"/>
+                    <h:outputText value="#{devtoolsController.selected.type}" title="#{bundle.ViewDevtoolsTitle_type}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_rank}"/>
+                    <h:outputText value="#{devtoolsController.selected.rank}" title="#{bundle.ViewDevtoolsTitle_rank}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_iduser}"/>
+                    <h:outputText value="#{devtoolsController.selected.iduser}" title="#{bundle.ViewDevtoolsTitle_iduser}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_createdAt}"/>
+                    <h:outputText value="#{devtoolsController.selected.createdAt}" title="#{bundle.ViewDevtoolsTitle_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_updatedAt}"/>
+                    <h:outputText value="#{devtoolsController.selected.updatedAt}" title="#{bundle.ViewDevtoolsTitle_updatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_description}"/>
+                    <h:outputText value="#{devtoolsController.selected.description}" title="#{bundle.ViewDevtoolsTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_url}"/>
+                    <h:outputText value="#{devtoolsController.selected.url}" title="#{bundle.ViewDevtoolsTitle_url}"/>
+                    <h:outputText value="#{bundle.ViewDevtoolsLabel_imagePath}"/>
+                    <h:outputText value="#{devtoolsController.selected.imagePath}" title="#{bundle.ViewDevtoolsTitle_imagePath}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{devtoolsController.destroyAndView}" value="#{bundle.ViewDevtoolsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewDevtoolsEditLink}"/>
+                <br />
+                <h:commandLink action="#{devtoolsController.prepareCreate}" value="#{bundle.ViewDevtoolsCreateLink}" />
+                <br />
+                <h:commandLink action="#{devtoolsController.prepareList}" value="#{bundle.ViewDevtoolsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewDevtoolsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

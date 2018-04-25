@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Bienvenue sur LOVBANCO</title>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <style>
+            body,h1 {font-family: "Raleway", sans-serif}
+            body, html {height: 100%}
+            .bgimg {
+                min-height: 100%;
+                background-position: center;
+                background-size: cover;
+                background-color: black;
+            }
+            .btn {
+                width: 100%;
+            }
+        </style>
+    </h:head>
+    <h:body>       
+        <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+            <div class="w3-display-middle">
+                <h1 class="w3-jumbo w3-animate-top">LOVBANCO</h1>
+                <hr class="w3-border-grey" style="margin:auto;width:40%"/>
+                <p class="w3-large w3-center">Ma banque adorée</p>
+                <div class="w3-half">
+                    <button class="w3-btn w3-round-xxlarge w3-green btn" onclick="document.getElementById('login').style.display = 'block'">Se connecter</button>
+                </div>
+                <div class="w3-half">
+                    <button class="w3-btn w3-round-xxlarge w3-red btn" onclick="document.getElementById('register').style.display = 'block'">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+        
+        <!--Login modal-->
+        <div id="login" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                
+                <!--Modal header-->
+                <div class="w3-center"><br/>
+                    <span onclick="document.getElementById('login').style.display = 'none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                    <h:graphicImage value="resources/images/avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"/>
+                </div>
+
+                <!--Login form-->
+                <h:form class="w3-container" id="login" onsubmit="document.getElementById('login').action='j_security_check';">
+                    <p:growl id="growl" sticky="true" showDetail="true"/>
+                    <div class="w3-section">
+                        <label><b>Username</b></label>
+                        <!--Important pas utiliser userController.selected.username ou password...on utilise les variables du manaedbea-->
+                        <h:inputText class="w3-input w3-border w3-margin-bottom" id="email" value="#{userController.username}" required="true" />
+                        <label><b>Mot de passe</b></label>
+                        <h:inputSecret class="w3-input w3-border w3-margin-bottom" id="passwd" value="#{userController.password}" required="true" />
+                        <h:commandButton class="w3-btn w3-round-xxlarge btn w3-block w3-green w3-section" value="Se connecter" action="#{userController.login}"></h:commandButton>
+                    </div>
+                </h:form>
+                
+                <!--Modal footer-->
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('login').style.display='none'" type="button" class="w3-button w3-round-xxlarge w3-red">Annuler</button>
+                    <!--<span class="w3-right w3-padding w3-hide-small"><a href="#">Mot de passe oublié?</a></span>-->
+                </div>
+                
+            </div>
+        </div>
+        
+        <!--Register modal-->
+        <div id="register" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+ 
+                <!--Modal header-->
+                <div class="w3-center"><br/>
+                    <span onclick="document.getElementById('register').style.display = 'none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                    <h:graphicImage value="resources/images/avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"/>
+                </div>
+
+                <!--Register form-->
+                <h:form class="w3-container">
+                    <div class="w3-section">
+                        <f:event listener="#{userController.validatePassword}" type="postValidate" />
+                        <div class="w3-row-padding">
+                            <div class="w3-half">
+                                <label><b>Nom</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="firstname" value="#{userController.selected.firstName}" required="true" />
+                            </div>
+                            <div class="w3-half">
+                                <label><b>Prénom</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="lastname" value="#{userController.selected.lastName}" required="true" />
+                            </div>
+                            
+                            <div class="w3-half">
+                                <label><b>Nom d'utilisateur</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="username_" value="#{userController.selected.username}" required="true" />
+                            </div>
+                            
+                            <div class="w3-half">
+                                <label><b>Email</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="email_" value="#{userController.selected.email}" required="true" />
+                            </div>
+                            
+                            <div class="w3-half">
+                                <label><b>Mot de passe</b></label>
+                                <h:inputSecret class="w3-input w3-border w3-margin-bottom" id="password" value="#{userController.selected.password}" required="true" />
+                            </div>
+                            <div class="w3-half">
+                                <label><b>Confirmation mot de passe</b></label>
+                                <h:inputSecret class="w3-input w3-border w3-margin-bottom" id="password_2" />
+                            </div>
+                        
+                            <div class="w3-third">
+                                <label><b>Numéro de la rue</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="streetnumber" value="#{userController.selected.streetNumber}" required="true" />
+                            </div>
+                            
+                            <div class="w3-third">
+                                <label><b>NPA</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="npa" value="#{userController.selected.npa}" required="true" />
+                            </div>
+                            
+                            <div class="w3-third">
+                                <label><b>Ville</b></label>
+                                <h:inputText class="w3-input w3-border w3-margin-bottom" id="city" value="#{userController.selected.city}" required="true" />
+                            </div>
+                            <label><b>Adresse</b></label>
+                            <h:inputText class="w3-input w3-border w3-margin-bottom" id="address" value="#{userController.selected.address}" required="true" />
+                        </div>
+                        <h:commandButton class="w3-btn w3-round-xxlarge btn w3-block w3-green w3-section" value="S'inscrire" action="#{userController.create}"></h:commandButton>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <a href="View.xhtml"></a>
+   <ui:composition template="/admin_template.xhtml">
+      <ui:define name="title">
+          <h3><b>#{bundle.CustomersList}</b></h3>
+      </ui:define>
+      <ui:define name="body">  
+          <h:form>
+                <h:outputText escape="false" value="#{bundle.ListUserEmpty}" rendered="#{userController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{userController.items.rowCount > 0}">
+                    <table class="w3-table-all w3-hoverable">
+                        <thead>
+                            <tr class="w3-red">
+                                <!--<th>#'{bundle.ListUserTitle_id}</th>-->
+                                <th>#{bundle.ListUserTitle_firstName}</th>
+                                <th>#{bundle.ListUserTitle_lastName}</th>
+                                <th>#{bundle.ListUserTitle_username}</th>
+                                <th>#{bundle.ListUserTitle_email}</th>
+                                <th>#{bundle.ListUserTitle_password}</th>
+                                <th>#{bundle.ListUserTitle_address}</th>
+                                <th>#{bundle.ListUserTitle_streetNumber}</th>
+                                <th>#{bundle.ListUserTitle_npa}</th>
+                                <th>#{bundle.ListUserTitle_city}</th>
+                                <th>#{bundle.ListUserTitle_created}</th>
+                                <th>#{bundle.Actions}</th>
+                            </tr>
+                        </thead>
+                        <ui:repeat value="#{userController.items}" var="item">
+                            <tr>
+                                <!--<td>#'{item.id}</td>-->
+                                <td>#{item.firstName}</td>
+                                <td>#{item.lastName}</td>
+                                <td>#{item.username}</td>
+                                <td>#{item.email}</td>
+                                <td>#{item.password}</td>
+                                <td>#{item.address}</td>
+                                <td>#{item.streetNumber}</td>
+                                <td>#{item.npa}</td>
+                                <td>#{item.city}</td>
+                                <td>#{item.created}</td>
+                                <td>
+                                    <h:commandLink action="#{userController.prepareView}" class="w3-button w3-teal w3-round" value="#{bundle.ListUserViewLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{userController.prepareEdit}" class="w3-button w3-blue w3-round" value="#{bundle.ListUserEditLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{userController.destroy}" class="w3-button w3-red w3-round" value="#{bundle.ListUserDestroyLink}"/>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <h:outputText value="#{userController.pagination.pageFirstItem + 1}..#{userController.pagination.pageLastItem + 1}/#{userController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink class="w3-button" action="#{userController.previous}" value="#{bundle.Previous} #{userController.pagination.pageSize}" rendered="#{userController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{userController.next}" value="#{bundle.Next} #{userController.pagination.pageSize}" rendered="#{userController.pagination.hasNextPage}"/>&nbsp;
+                    <br/>
+                    <br/>
+                    <b><h:commandLink class="w3-button w3-white w3-border w3-border-red w3-round-large" action="#{userController.prepareCreate}" value="#{bundle.ListUserCreateLink}"/></b>
+                </h:panelGroup>
+            </h:form>
+      </ui:define>
+   </ui:composition>
+</html>
