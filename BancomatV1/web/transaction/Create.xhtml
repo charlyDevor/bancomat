@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/admin_template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTransactionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{transactionController.selected.id}" title="#{bundle.CreateTransactionTitle_id}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{transactionController.selected.amount}" title="#{bundle.CreateTransactionTitle_amount}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_amount}"/>
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_transactionDate}" for="transactionDate" />
+                    <h:inputText id="transactionDate" value="#{transactionController.selected.transactionDate}" title="#{bundle.CreateTransactionTitle_transactionDate}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_transactionDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{transactionController.selected.description}" title="#{bundle.CreateTransactionTitle_description}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_description}"/>
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_accountId}" for="accountId" />
+                    <h:selectOneMenu id="accountId" value="#{transactionController.selected.accountId}" title="#{bundle.CreateTransactionTitle_accountId}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_accountId}">
+                        <f:selectItems value="#{accountController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTransactionLabel_transactionTypeId}" for="transactionTypeId" />
+                    <h:selectOneMenu id="transactionTypeId" value="#{transactionController.selected.transactionTypeId}" title="#{bundle.CreateTransactionTitle_transactionTypeId}" required="true" requiredMessage="#{bundle.CreateTransactionRequiredMessage_transactionTypeId}">
+                        <f:selectItems value="#{transactionTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{transactionController.create}" value="#{bundle.CreateTransactionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{transactionController.prepareList}" value="#{bundle.CreateTransactionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTransactionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDevtoolsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListDevtoolsEmpty}" rendered="#{devtoolsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{devtoolsController.items.rowCount > 0}">
+                    <h:outputText value="#{devtoolsController.pagination.pageFirstItem + 1}..#{devtoolsController.pagination.pageLastItem + 1}/#{devtoolsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{devtoolsController.previous}" value="#{bundle.Previous} #{devtoolsController.pagination.pageSize}" rendered="#{devtoolsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{devtoolsController.next}" value="#{bundle.Next} #{devtoolsController.pagination.pageSize}" rendered="#{devtoolsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{devtoolsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.type}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_rank}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rank}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_iduser}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iduser}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_createdAt}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdAt}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_updatedAt}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.updatedAt}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_url}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.url}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDevtoolsTitle_imagePath}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imagePath}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{devtoolsController.prepareView}" value="#{bundle.ListDevtoolsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{devtoolsController.prepareEdit}" value="#{bundle.ListDevtoolsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{devtoolsController.destroy}" value="#{bundle.ListDevtoolsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{devtoolsController.prepareCreate}" value="#{bundle.ListDevtoolsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListDevtoolsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

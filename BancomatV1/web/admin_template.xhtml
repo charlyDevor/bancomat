@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <style>
+            html,body,h1,h2,h3,h4,h5 {
+                font-family: "Raleway", sans-serif
+            }
+            /* Style the active class, and buttons on mouse-over */
+            .active, men:hover {
+                background-color: #666;
+                color: white;
+            }
+        </style>
+    </h:head>
+    <h:body class="w3-light-grey">
+         
+        <!-- Top container -->
+        <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            <span class="w3-bar-item w3-left">Administrateur-Lovbancomat</span>
+            <h:form>
+                <span class="w3-bar-item w3-right"><i class="fa fa-sign-out"></i><h:commandLink action="#{userController.logout()}" value="Quitter" style="text-decoration:none"/></span>
+            </h:form>
+        </div>
+        
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar w3-collapse w3-white" style="z-index:3;width:300px;" id="mySidebar"><br/>
+            <div class="w3-container w3-row">
+                <div class="w3-col s4">
+                    <h:graphicImage value="../resources/images/avatar.png" alt="Avatar" class="w3-circle w3-margin-right" style="width:46px"/>
+                </div>
+                <div class="w3-col s8 w3-bar">
+                    <h:outputText value="#{userController.selected.firstName}"></h:outputText>
+                    <span>Bienvenu, #{request.getRemoteUser()}<strong></strong></span><br/>
+                </div>
+            </div>
+            <hr/>
+            <div class="w3-container">
+                <h3><b>Menu</b></h3>
+            </div>
+            <div class="w3-bar-block" >
+                <h:form>
+                    <p:growl id="growl" sticky="true" showDetail="true"/>
+                    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+                    <a href="User_list.xhtml" class="w3-bar-item w3-button w3-padding men"><i class="fa fa-users fa-fw fa-2x"></i>  Clients</a>
+                    <a href="Demand.xhtml" class="w3-bar-item w3-button men w3-padding"><i class="fa fa-bullhorn fa-fw fa-2x"></i>  Gérer les demandes <span class="w3-badge w3-red">#{demandController.all().size()}</span></a>
+                    <a href="Historique.xhtml" class="w3-bar-item w3-button men w3-padding"><i class="fa fa-address-book fa-fw fa-2x"></i>  Historiques</a>
+                </h:form>
+            </div>
+        </nav>
+        
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+        
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+            <!-- Header -->
+            <header class="w3-container" style="padding-top:22px">
+                <h2><b><i class="fa fa-dashboard"></i>#{bundle.Dashboard}</b></h2>
+            </header>
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-quarter">
+                    <div class="w3-container w3-red w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3>#{demandController.all().size()}</h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Demande de comptes</h4>
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-blue w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-balance-scale w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3>#{transactionController.all().size()}</h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Transactions</h4>
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-teal w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-university w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3>#{accountController.all().size()}</h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Nombre de comptes ouverts</h4>
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3>#{userController.all().size()}</h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Clients de la banque</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-panel">
+                <div class="w3-row-padding" style="margin:0 -16px">
+                    <ui:insert name="title">Default Body</ui:insert>
+                    <ui:insert name="body">Default Body</ui:insert>
+                </div>
+            </div>
+        </div>
+        <!--<h:outputScript name="jsf.js" library="js" target="body"/>-->
+    </h:body>
+
+</html>

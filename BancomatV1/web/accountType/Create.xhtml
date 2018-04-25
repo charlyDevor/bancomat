@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAccountTypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAccountTypeLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{accountTypeController.selected.id}" title="#{bundle.CreateAccountTypeTitle_id}" required="true" requiredMessage="#{bundle.CreateAccountTypeRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateAccountTypeLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{accountTypeController.selected.name}" title="#{bundle.CreateAccountTypeTitle_name}" required="true" requiredMessage="#{bundle.CreateAccountTypeRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.CreateAccountTypeLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{accountTypeController.selected.description}" title="#{bundle.CreateAccountTypeTitle_description}" required="true" requiredMessage="#{bundle.CreateAccountTypeRequiredMessage_description}"/>
+                    <h:outputLabel value="#{bundle.CreateAccountTypeLabel_interestRate}" for="interestRate" />
+                    <h:inputText id="interestRate" value="#{accountTypeController.selected.interestRate}" title="#{bundle.CreateAccountTypeTitle_interestRate}" required="true" requiredMessage="#{bundle.CreateAccountTypeRequiredMessage_interestRate}"/>
+                    <h:outputLabel value="#{bundle.CreateAccountTypeLabel_withdrawalLimit}" for="withdrawalLimit" />
+                    <h:inputText id="withdrawalLimit" value="#{accountTypeController.selected.withdrawalLimit}" title="#{bundle.CreateAccountTypeTitle_withdrawalLimit}" required="true" requiredMessage="#{bundle.CreateAccountTypeRequiredMessage_withdrawalLimit}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{accountTypeController.create}" value="#{bundle.CreateAccountTypeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{accountTypeController.prepareList}" value="#{bundle.CreateAccountTypeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAccountTypeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

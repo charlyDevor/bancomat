@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/user_template.xhtml">
+        <ui:define name="title">
+            <h3><b>#{bundle.Account}</b></h3>
+        </ui:define>
+        <ui:define name="body">
+            <div class="w3-cell-row" style="width:75%; border: 5px solid red; border-radius: 10px; background: white">
+
+                <div class="w3-container w3-cell">
+                    <h1><b>#{accountController.selected.accountTypeId}</b></h1>
+                    <h4>N° <b>#{accountController.selected.accountNumber}</b></h4>
+                </div>
+
+                <div class="w3-container w3-cell">
+                    <h1><b>CHF</b> #{accountController.selected.balance}</h1>
+                </div>
+            </div>
+            <br/>
+            <div class="w3-container">
+                
+                <h:form>
+                    <h:outputText escape="false" value="#{bundle.ListTransactionEmpty}" rendered="#{transactionController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{transactionController.items.rowCount > 0}">
+                        <table class="w3-table-all w3-hoverable" id="transTable">
+                            <thead>
+                                <tr class="w3-red">
+                                    <th style="width:10%;">Date de l'opération</th>
+                                    <th style="width:20%;">Opération</th>
+                                    <th style="width:30%;">Description</th>
+                                    <th style="width:10%;">Compte</th>
+                                    <th style="width:10%;">Montant</th>
+                                </tr>
+                            </thead>
+                            <ui:repeat value="#{transactionController.items}" var="item">
+                                <ui:fragment rendered="#{item.accountId.id eq accountController.selected.id}"><br/>
+                                    <tr>
+                                        <td>#{item.transactionDate}</td>
+                                        <td>#{item.transactionTypeId.name}</td>
+                                        <td>#{item.description}</td>
+                                        <td>#{item.accountId.accountNumber}</td>
+                                        <td>#{item.amount}</td>
+                                    </tr>
+                                </ui:fragment>
+                            </ui:repeat>
+                        </table>
+                        <h:outputText value="#{transactionController.pagination.pageFirstItem + 1}..#{transactionController.pagination.pageLastItem + 1}/#{transactionController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{transactionController.previous}" value="#{bundle.Previous} #{transactionController.pagination.pageSize}" rendered="#{transactionController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{transactionController.next}" value="#{bundle.Next} #{transactionController.pagination.pageSize}" rendered="#{transactionController.pagination.hasNextPage}"/>&nbsp;
+                    </h:panelGroup>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        
+        <!--Règles de navigation-->
+        <navigation-rule>
+            <from-view-id>/Opening.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{userController.login}</from-action>
+                <from-outcome>OK</from-outcome>
+                <to-view-id>/secureUser/Account_list.xhtml</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-action>#{userController.create}</from-action>
+                <from-outcome>Create</from-outcome>
+                <to-view-id>secureUser/Account_list.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <navigation-rule>
+            <from-view-id>/secureUser/Account_list.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{demandController.create()}</from-action>
+                <from-outcome>Create</from-outcome>
+                <to-view-id>/secureUser/Account_list.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        
+        <navigation-rule>
+            <from-view-id>/secureAdmin/User_list.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{userController.prepareView}</from-action>
+                <from-outcome>View</from-outcome>
+                <to-view-id>/secureAdmin/View.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+    </application>
+</faces-config>

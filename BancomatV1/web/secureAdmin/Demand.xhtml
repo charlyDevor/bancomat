@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   <ui:composition template="/admin_template.xhtml">
+      <ui:define name="title">
+         <h3><b>#{bundle.NewDemands}</b></h3>
+      </ui:define>
+      <ui:define name="body" class="w3-container">
+          <h:form>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+              <h:outputText escape="false" value="#{bundle.ListDemandEmpty}" rendered="#{demandController.all().size() == 0}"/>
+                <h:panelGroup rendered="#{demandController.all().size() > 0}">
+                    <table class="w3-table-all w3-hoverable">
+                        <thead>
+                            <tr class="w3-red">
+                                <th>#{bundle.ListDemandTitle_id}</th>
+                                <th>#{bundle.CompleteName}</th>
+                                <th>#{bundle.Status}</th>
+                                <th>#{bundle.Type}</th>
+                                <th>#{bundle.Actions}</th>
+                            </tr>
+                        </thead>
+                        <ui:repeat value="#{demandController.all()}" var="item">
+                            <tr>
+                                <td>#{item.id}</td>
+                                <td>#{item.getUserId().getFirstName()} #{item.getUserId().getLastName()}</td>
+                                <td>#{item.getAccepter()}</td>
+                                <td>#{item.getAccountTypeId().getName()}</td>
+                                <td>
+                                    <p:commandButton value="Accepter la demande" update="@form" ajax="true" action="#{demandController.acceptDemand(item.id, item.accountTypeId.id, item.userId.id)}" class="w3-button w3-teal w3-round">
+                                        <p:confirm header="Confirmation" message="Confirmez-vous l'ouverture du compte pour" icon="ui-icon-alert"/>
+                                    </p:commandButton>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <h:outputText value="#{demandController.pagination.pageFirstItem + 1}..#{demandController.pagination.pageLastItem + 1}/#{demandController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{demandController.previous}" value="#{bundle.Previous} #{demandController.pagination.pageSize}" rendered="#{demandController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{demandController.next}" value="#{bundle.Next} #{demandController.pagination.pageSize}" rendered="#{demandController.pagination.hasNextPage}"/>&nbsp;
+                </h:panelGroup>
+                 
+                
+                <p:confirmDialog global="true">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </h:form>
+      </ui:define>
+   </ui:composition>
+</html>
